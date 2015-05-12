@@ -1,3 +1,5 @@
 # settings for development/testing
 ---
+mailman::http_hostname: lists.awesomnia.awesomeretro.dev
+
 awesome::maillist::admin: mail@ijohan.nl

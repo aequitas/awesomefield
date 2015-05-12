@@ -7,7 +7,6 @@ classes:
   - mailman::postfix
   - nginx
 
-# generic nginx stuff
 # basic firewall config
 
 firewall:
@@ -40,14 +39,17 @@ firewall:
   999 drop the rest:
     action: drop
 
+hosts:
+  "%{hiera('mailman::http_hostname')}":
+    ip: 127.0.0.1
 
 # configure mailman mailing lists
 
 mailman::enable_service: true
 mailman::site_pw: geheim
 mailman::mta: Postfix
-mailman::smtp_hostname: "%{::fqdn}"
-mailman::http_hostname: "lists.%{::fqdn}"
+mailman::smtp_hostname: awesomeretro.com
+mailman::http_hostname: lists.awesomeretro.com
 
 mailman::apache::mailman_cgi_dir: /usr/lib/cgi-bin/mailman/
 mailman::apache::mailman_icons_dir: /usr/share/images/mailman/
@@ -59,24 +61,34 @@ awesome::maillist::password: geheim
 maillists:
   info:
     description: ''
+    mailserver: awesomeretro.com
   bestuur:
     description: Mailing list for board members
+    mailserver: awesomeretro.com
   it:
     description: Mailing list for IT personel
+    mailserver: awesomeretro.com
   crew:
     description: Public list for
+    mailserver: awesomeretro.com
   tv:
     description: ''
+    mailserver: awesomeretro.com
   redactie:
     description: ''
+    mailserver: awesomeretro.com
   donaties:
     description: ''
+    mailserver: awesomeretro.com
 
 nginx::nginx_vhosts:
-  "lists.%{::fqdn}":
-    proxy: "http://lists.%{::fqdn}:8081"
+  lists.awesomeretro.com:
+    server_name:
+      - lists.awesomeretro.com
+      - "lists.%{::fqdn}"
+    proxy: http://127.0.0.1:8081
 nginx::nginx_locations:
   icons:
-    vhost: "lists.%{::fqdn}"
+    vhost: lists.awesomeretro.com
     location: '~ "^(/doc/mailman/images|/images/mailman)/(.*(png|jpg|gif))$"'
     location_alias: /usr/share/images/mailman/$2
