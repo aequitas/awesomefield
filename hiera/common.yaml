@@ -8,14 +8,37 @@ classes:
   - nginx
 
 # generic nginx stuff
+# basic firewall config
 
 firewall:
+  100 allow related, established:
+    proto: all
+    state:
+      - RELATED
+      - ESTABLISHED
+    action: accept
+  100 allow icmp:
+    proto: icmp
+    action: accept
+  100 allow local:
+    proto: all
+    iniface: lo
+    action: accept
+  200 allow ssh:
+    port: ssh
+    action: accept
   300 allow http traffic in:
     port: http
     action: accept
   300 allow https traffic in:
     port: https
     action: accept
+  300 allow mail from diggie:
+    port: 25
+    source: 217.198.23.134/32
+    action: accept
+  999 drop the rest:
+    action: drop
 
 
 # configure mailman mailing lists
