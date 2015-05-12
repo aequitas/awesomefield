@@ -17,3 +17,5 @@
   - "%{fqdn}"
   - users
   - common
+
+:merge_behavior: deeper
