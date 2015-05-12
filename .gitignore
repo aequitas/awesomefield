@@ -2,3 +2,4 @@
 vendor/modules/
 Puppetfile.lock
 .vagrant/
+keys/private_key.pkcs7.pem
