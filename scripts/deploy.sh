@@ -3,4 +3,6 @@
 host=$1
 shift
 
-rsync -ai --delete --exclude=.git . ${host}:provision/;ssh ${host} sudo provision/scripts/apply.sh $*
+sync='hiera keys manifests modules vendor scripts hiera.yaml'
+
+rsync -a --delete ${sync} ${host}:provision/;ssh ${host} sudo provision/scripts/apply.sh $*
