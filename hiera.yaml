@@ -1,0 +1,11 @@
+---
+:backends:
+  - yaml
+
+:yaml:
+  :datadir: hiera
+
+:hierarchy:
+  - "%{fqdn}"
+  - users
+  - common
