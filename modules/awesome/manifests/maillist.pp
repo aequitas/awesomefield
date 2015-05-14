@@ -17,21 +17,26 @@ define awesome::maillist (
   mailman::list_config { "${name}, archives only for members":
     mlist    => $name,
     variable => 'archive_private',
-    value    => '1',
+    value    => "'1'",
   }
   mailman::list_config { "${name}, member overview only for members":
     mlist    => $name,
     variable => 'private_roster',
-    value    => '1',
+    value    => "'1'",
   }
   mailman::list_config { "${name}, new members should confirm their address and admin should aprove":
     mlist    => $name,
     variable => 'subscribe_policy',
-    value    => '3',
+    value    => "'3'",
   }
   mailman::list_config { "${name}, hostname for this mailing list":
     mlist    => $name,
     variable => 'host_name',
     value    => "'${mailserver}'",
+  }
+  mailman::list_config { "${name}, mailinglist owner":
+    mlist    => $name,
+    variable => 'owner',
+    value    => "['${admin}']",
   }
 }

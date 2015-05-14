@@ -50,7 +50,7 @@ postfix::server::extra_main_parameters:
   milter_default_action: accept
   smtpd_milters: inet:localhost:8891
   non_smtpd_milters: inet:localhost:8891
-postfix::server::mydestination: $myhostname, localhost.$mydomain, localhost, lists.awesomeretro.org
+postfix::server::mydestination: $myhostname, localhost.$mydomain, localhost, lists.awesomeretro.org, awesomeretro.org
 
 # configure mailman mailing lists
 
@@ -64,7 +64,7 @@ mailman::apache::mailman_cgi_dir: /usr/lib/cgi-bin/mailman/
 mailman::apache::mailman_icons_dir: /usr/share/images/mailman/
 mailman::apache::port: 8081
 
-awesome::maillist::admin: mail@ijohan.nl
+awesome::maillist::admin: awesomeretro@ijohan.nl
 awesome::maillist::password: geheim
 
 maillists:
@@ -81,6 +81,8 @@ maillists:
   redactie:
     mailserver: awesomeretro.org
   donaties:
+    mailserver: awesomeretro.org
+  mailman:
     mailserver: awesomeretro.org
 
 nginx::nginx_vhosts:
