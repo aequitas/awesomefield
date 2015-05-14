@@ -8,6 +8,7 @@ mod 'thias-postfix'
 mod 'nwaller-mailman', :git => 'git://github.com/aequitas/puppet-mailman.git'
 mod 'jfryman-nginx'
 mod 'puppetlabs-firewall'
+mod 'rjpearce-opendkim', :git => 'git@github.com:rjpearce/puppet-opendkim.git'
 
 # use dependencies defined in Modulefile
 # modulefile
