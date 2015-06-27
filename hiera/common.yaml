@@ -50,7 +50,7 @@ postfix::server::extra_main_parameters:
   milter_default_action: accept
   smtpd_milters: inet:localhost:8891
   non_smtpd_milters: inet:localhost:8891
-postfix::server::mydestination: $myhostname, localhost.$mydomain, localhost, lists.awesomeretro.org, awesomeretro.org
+postfix::server::mydestination: $myhostname, localhost.$mydomain, localhost, lists.awesomeretro.org
 postfix::server::relayhost: mail.it-rex.nl
 
 # configure mailman mailing lists
