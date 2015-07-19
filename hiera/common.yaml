@@ -50,7 +50,7 @@ postfix::server::extra_main_parameters:
   milter_default_action: accept
   smtpd_milters: inet:localhost:8891
   non_smtpd_milters: inet:localhost:8891
-postfix::server::mydestination: $myhostname, localhost.$mydomain, localhost, lists.awesomeretro.org
+postfix::server::mydestination: $myhostname, localhost.$mydomain, localhost, lists.awesomeretro.org, lists.awesomespace.nl
 postfix::server::relayhost: mail.it-rex.nl
 
 # configure mailman mailing lists
@@ -87,7 +87,14 @@ maillists:
     mailserver: awesomeretro.org
   bcc:
     mailserver: awesomeretro.org
+  community:
+    mailserver: awesomeretro.org
   members:
+    present: false
+    mailserver: awesomespace.nl
+  subscribers:
+    mailserver: awesomespace.nl
+  announce:
     mailserver: awesomespace.nl
 
 nginx::nginx_vhosts:

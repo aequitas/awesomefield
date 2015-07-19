@@ -10,7 +10,7 @@ define awesome::maillist (
 
   maillist { $name:
     ensure      => $ensure,
-    description => $description,
+    description => "${name}@${mailserver}",
     admin       => $admin,
     password    => $password,
     webserver   => $webserver,
@@ -22,6 +22,11 @@ define awesome::maillist (
       mlist    => $name,
       variable => 'archive_private',
       value    => "'1'",
+    }
+    mailman::list_config { "${name}, description":
+      mlist    => $name,
+      variable => 'description',
+      value    => "'${name}@${mailserver}'",
     }
     mailman::list_config { "${name}, member overview only for members":
       mlist    => $name,
