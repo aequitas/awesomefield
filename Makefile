@@ -7,3 +7,6 @@ Puppetfile.lock: Puppetfile
 
 deploy: Puppetfile.lock
 	scripts/deploy.sh ${host}
+
+check: Puppetfile.lock
+	scripts/deploy.sh ${host} --noop --verbose

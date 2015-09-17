@@ -96,6 +96,17 @@ maillists:
     mailserver: awesomespace.nl
   announce:
     mailserver: awesomespace.nl
+  announce:
+    mailserver: marcopolo1.nl
+  general:
+    mailserver: marcopolo1.nl
+
+awesome::vhosts:
+  awesomeretro.org:
+    server_name:
+      - .awesomeretro.org
+      - awesomeretro.org.%{::fqdn}
+
 
 nginx::nginx_vhosts:
   lists.awesomeretro.org:
