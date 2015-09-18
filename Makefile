@@ -5,8 +5,8 @@ host = awesomnia.awesomeretro.org
 Puppetfile.lock: Puppetfile
 	librarian-puppet install
 
-deploy: Puppetfile.lock
+apply deploy: Puppetfile.lock
 	scripts/deploy.sh ${host}
 
 check: Puppetfile.lock
-	scripts/deploy.sh ${host} --noop --verbose
+	scripts/deploy.sh ${host} --noop
