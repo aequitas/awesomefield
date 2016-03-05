@@ -8,8 +8,7 @@ classes:
   - opendkim
   - awesome
 
-# basic firewall config
-
+## basic firewall config
 firewall:
   100 allow related, established:
     proto: all
@@ -39,6 +38,12 @@ firewall:
     action: accept
   999 drop the rest:
     action: drop
+
+## vhosts
+awesome::vhosts:
+  awesomeretro.org: {}
+
+## maillist config
 
 hosts:
   "%{hiera('mailman::http_hostname')}":
@@ -106,13 +111,6 @@ maillists:
     mailserver: marcopolo1.nl
   experts:
     mailserver: dutchgameshistory.nl
-
-awesome::vhosts:
-  awesomeretro.org:
-    server_name:
-      - .awesomeretro.org
-      - awesomeretro.org.%{::fqdn}
-
 
 nginx::nginx_vhosts:
   lists.awesomeretro.org:
