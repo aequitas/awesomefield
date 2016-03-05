@@ -8,5 +8,5 @@ Puppetfile.lock: Puppetfile
 apply deploy: Puppetfile.lock
 	scripts/deploy.sh ${host}
 
-check: Puppetfile.lock
+plan: Puppetfile.lock
 	scripts/deploy.sh ${host} --noop
