@@ -41,8 +41,16 @@ firewall:
 
 ## vhosts
 awesome::vhosts:
-  awesomeretro.org: {}
+  # wordpress symlinks with additional files, number after vhost is wordpress site number
+  elgerjonker.nl: {}   #2
+  awesomeretro.org: {} #11
+  awesomespace.nl: {}  #14
+  
+  # Sites that have just files, and no symlinks to wordpress.
+  # None here...
 
+  # Sites that only require wordpress do not need a vhost. So there is a lot that is not mentioned here. Hooray!
+  
 ## maillist config
 
 hosts:
