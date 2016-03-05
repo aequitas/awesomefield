@@ -4,11 +4,14 @@
 forge "https://forgeapi.puppetlabs.com"
 
 mod 'puppetlabs-apache'
+mod 'puppetlabs-stdlib'
 mod 'thias-postfix'
 mod 'nwaller-mailman', :git => 'git://github.com/aequitas/puppet-mailman.git'
-mod 'jfryman-nginx'
+mod 'jfryman-nginx', '0.3.0'
 mod 'puppetlabs-firewall'
 mod 'rjpearce-opendkim', :git => 'git@github.com:rjpearce/puppet-opendkim.git'
+
+mod 'danzilio-letsencrypt'
 
 # use dependencies defined in Modulefile
 # modulefile

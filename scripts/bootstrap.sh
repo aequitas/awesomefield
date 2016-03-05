@@ -1,12 +1,9 @@
 #!/usr/bin/env bash
 
-skipfile=.`basename $0`.skip
+set -ve
 
-test -f ${skipfile} && exit 0
-
-wget http://apt.puppetlabs.com/puppetlabs-release-pc1-wheezy.deb
-sudo dpkg -i puppetlabs-release-pc1-wheezy.deb
-sudo apt-get update
-sudo apt-get -yqq install puppet
-sudo gem install hiera-eyaml deep_merge
-touch ${skipfile}
+curl http://apt.puppetlabs.com/puppetlabs-release-trusty.deb -o puppetlabs-release-trusty.deb
+sudo dpkg -i puppetlabs-release-trusty.deb
+sudo apt-get -q update
+sudo apt-get install -yqq puppet
+sudo gem2.0 install hiera-eyaml deep_merge hiera

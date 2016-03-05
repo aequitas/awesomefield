@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
+set -e
+
 cd $(dirname $0)/..
 
-which puppet >/dev/null || ./bootstrap.sh
+which puppet >/dev/null || ./scripts/bootstrap.sh
 
 puppet apply \
   --modulepath=modules:vendor/modules \
