@@ -6,4 +6,4 @@ curl http://apt.puppetlabs.com/puppetlabs-release-trusty.deb -o puppetlabs-relea
 sudo dpkg -i puppetlabs-release-trusty.deb
 sudo apt-get -q update
 sudo apt-get install -yqq puppet
-sudo gem2.0 install hiera-eyaml deep_merge hiera
+sudo gem install hiera-eyaml deep_merge hiera highline

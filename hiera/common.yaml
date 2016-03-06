@@ -1,7 +1,10 @@
 classes:
   - base
-  - nginx
   - awesome
+  - awesome::motd
+  - awesome::multisite
+  - awesome::pam_ssh_agent_auth
+
 
 # letsencrypt
 letsencrypt::email: awesomeretro@ijohan.nl
@@ -13,13 +16,8 @@ letsencrypt::agree_tos: true
 #         - /var/www/lists.awesomeretro.org
 #     manage_cron: true
 
-
-
-
-awesome::vhosts:
-  awesomeretro.org: {}
-
 # basic firewall config
+
 
 firewall:
   100 allow related, established:
@@ -50,3 +48,9 @@ firewall:
     action: accept
   999 drop the rest:
     action: drop
+
+# ssh server configuration
+# https://forge.puppetlabs.com/saz/ssh#hiera-example
+ssh::storeconfigs_enabled: false
+ssh::server_options:
+  PasswordAuthentication: 'no'

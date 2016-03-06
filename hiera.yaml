@@ -15,7 +15,7 @@
 
 :hierarchy:
   - "%{fqdn}"
-  - users
+  - maillists
   - common
 
 :merge_behavior: deeper

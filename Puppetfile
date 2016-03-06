@@ -12,21 +12,11 @@ mod 'puppetlabs-firewall'
 mod 'rjpearce-opendkim', :git => 'git@github.com:rjpearce/puppet-opendkim.git'
 
 mod 'danzilio-letsencrypt'
-
-# use dependencies defined in Modulefile
-# modulefile
-
-# A module from the Puppet Forge
-# mod 'puppetlabs-stdlib'
-
-# A module from git
-# mod 'puppetlabs-ntp',
-#   :git => 'git://github.com/puppetlabs/puppetlabs-ntp.git'
-
-# A module from a git branch/tag
-# mod 'puppetlabs-apt',
-#   :git => 'https://github.com/puppetlabs/puppetlabs-apt.git',
-#   :ref => '1.4.x'
-
-# A module from Github pre-packaged tarball
-# mod 'puppetlabs-apache', '0.6.0', :github_tarball => 'puppetlabs/puppetlabs-apache'
+mod 'thias-php'
+mod 'puppetlabs-mysql'
+mod 'puppetlabs-apt'
+mod 'puppetlabs-ntp'
+mod 'puppet-unattended_upgrades'
+mod 'saz-ssh'
+mod 'puppet-updatemotd', :git => 'https://github.com/gds-operations/puppet-updatemotd.git'
+mod 'puppetlabs-concat'

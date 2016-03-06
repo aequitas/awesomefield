@@ -1,7 +1,7 @@
 define awesome::vhost(
 
 ){
-    $domains = ["www.${title}"]
+    $domains = [$name, "www.${title}"]
 
     $webroot = "/var/www/${title}"
 
@@ -9,13 +9,13 @@ define awesome::vhost(
         ensure => directory,
     } ->
 
-    nginx::resource::vhost { $title:
+    nginx::resource::vhost { $server_name:
         server_name      => $domains,
-        rewrite_to_https => true,
+        # rewrite_to_https => true,
         www_root         => $webroot,
-        ssl              => true,
-        ssl_key          => "/etc/letsencrypt/live/${title}/privkey.pem",
-        ssl_cert         => "/etc/letsencrypt/live/${title}/fullchain.pem",
+        # ssl              => true,
+        # ssl_key          => "/etc/letsencrypt/live/${title}/privkey.pem",
+        # ssl_cert         => "/etc/letsencrypt/live/${title}/fullchain.pem",
     }
     #  ->
     #
