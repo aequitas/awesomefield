@@ -70,23 +70,3 @@ maillists:
     mailserver: marcopolo1.nl
   experts:
     mailserver: dutchgameshistory.nl
-
-nginx::nginx_vhosts:
-  lists.awesomeretro.org:
-    server_name:
-      - lists.awesomeretro.org
-      - "lists.%{::fqdn}"
-    ssl: true
-    rewrite_to_https: true
-    ssl_key: /etc/letsencrypt/live/lists.awesomeretro.org/privkey.pem
-    ssl_cert: /etc/letsencrypt/live/lists.awesomeretro.org/fullchain.pem
-    proxy: http://127.0.0.1:8081
-  lists.awesomeretro.com:
-    location_custom_cfg:
-      rewrite:
-        - ". http://lists.awesomeretro.org permanent"
-nginx::nginx_locations:
-  icons:
-    vhost: lists.awesomeretro.org
-    location: '~ "^(/doc/mailman/images|/images/mailman)/(.*(png|jpg|gif))$"'
-    location_alias: /usr/share/images/mailman/$2

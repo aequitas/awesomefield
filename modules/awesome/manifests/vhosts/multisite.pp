@@ -5,10 +5,16 @@ define awesome::vhosts::multisite (
     $listen_options=undef,
     $rewrite_to_https=true,
 ){
-    $le_server_name = $server_name ? {
-        '_'     => $name,
-        default => $server_name,
+    if $server_name == '_' {
+        $le_server_name = $name
+        $le_subdomains = []
+        $server_names = [$name]
+    } else {
+        $le_server_name = $server_name
+        $le_subdomains = ["www.${server_name}"]
+        $server_names = [$server_name, "www.${server_name}"]
     }
+
     $certfile = "${::letsencrypt::cert_root}/${le_server_name}/fullchain.pem"
     $keyfile = "${::letsencrypt::cert_root}/${le_server_name}/privkey.pem"
 
@@ -26,7 +32,7 @@ define awesome::vhosts::multisite (
             group  => www-data;
     } ->
     nginx::resource::vhost { $name:
-        server_name      => [$server_name],
+        server_name      => $server_names,
         www_root         => $multisite_webroot,
         index_files      => ['index.php'],
         try_files        => ["\$uri", "\$uri/", '/index.php?$args'],
@@ -48,7 +54,9 @@ define awesome::vhosts::multisite (
     }
 
     # configure letsencrypt
-    letsencrypt::domain{ $le_server_name: }
+    letsencrypt::domain{ $le_server_name:
+        subdomains => $le_subdomains,
+    }
     nginx::resource::location { "letsencrypt_${name}":
         location       => '/.well-known/acme-challenge',
         vhost          => $name,

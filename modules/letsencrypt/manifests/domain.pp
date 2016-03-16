@@ -1,10 +1,12 @@
 define letsencrypt::domain (
     $domain = $title,
+    $subdomains = [],
 ){
+    $subdomain_string = join($subdomains, ' ')
 
     concat::fragment { "letsencrypt_domain_${domain}":
         target  => "${letsencrypt::config_root}/domains.txt",
-        content => "${domain}\n",
+        content => "${domain} ${subdomain_string}\n",
     }
 
     file {

@@ -62,6 +62,16 @@ class awesome (
     opendkim::domain { 'awesomeretro.org':
         private_key_content => hiera('dkim::private_key'),
     }
+    awesome::vhosts::proxy { 'lists.awesomeretro.org':
+        proxy => 'http://127.0.0.1:8081',
+    }
+    nginx::resource::location { 'icons':
+        location       => "~ \"^(/doc/mailman/images|/images/mailman)/(.*(png|jpg|gif))\$\"",
+        vhost          => 'lists.awesomeretro.org',
+        location_alias => "/usr/share/images/mailman/\$2",
+        ssl            => true,
+    }
+
 
     # phpmyadmin
     File['/var/www/phpmyadmin/html/'] ->
