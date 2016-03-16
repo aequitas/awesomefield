@@ -7,8 +7,8 @@ classes:
 
 
 # letsencrypt
-letsencrypt::email: awesomeretro@ijohan.nl
-letsencrypt::agree_tos: true
+letsencrypt::email: awesome@ijohan.nl
+
 # letsencrypt::nginx_vhosts:
 #   lists.awesomeretro.org:
 #     plugin: webroot
@@ -16,8 +16,25 @@ letsencrypt::agree_tos: true
 #         - /var/www/lists.awesomeretro.org
 #     manage_cron: true
 
-# basic firewall config
+# additional multisite vhosts with own webroot
+vhosts::multisite:
+  # Sites that only require wordpress do not need a vhost. So there is a lot that is not mentioned here. Hooray!
+  # wordpress symlinks with additional files, number after vhost is wordpress site number
+  elgerjonker.nl: {}   #2
+  awesomeretro.org: {} #11
+  awesomespace.nl: {}  #14
+  hackerhotel.nl: {} #15
+  copynite.nl: {} #21
 
+  # Sites that have just files, and no symlinks to wordpress.
+  # None here...
+
+awesome::pma_allow:
+  - "212.79.224.10/32"
+  - "82.161.93.152/32"
+  - "62.131.237.165/32"
+
+# basic firewall config
 
 firewall:
   100 allow related, established:

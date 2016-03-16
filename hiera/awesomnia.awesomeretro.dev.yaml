@@ -3,3 +3,7 @@
 mailman::http_hostname: lists.awesomnia.awesomeretro.dev
 
 awesome::maillist::admin: mail@ijohan.nl
+
+dkim::private_key: "key"
+
+dkim::public_key: "key"

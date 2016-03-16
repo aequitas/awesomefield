@@ -1,5 +1,6 @@
 class awesome (
     $mysql_root_pw=undef,
+    $pma_allow=undef,
 ){
     # enable apt unattended security upgrades
     class { '::apt': }
@@ -22,7 +23,7 @@ class awesome (
     class { '::ssh': }
 
     # create users
-    create_resources(awesome::user, hiera_hash('awesome::users'))
+    create_resources(awesome::user, hiera_hash('awesome::users', {}))
 
     # let sudoers know not to change anything outside of puppet
     file {
@@ -33,10 +34,15 @@ class awesome (
               content => "Defaults\tlecture=\"always\"\nDefaults\tlecture_file=\"/etc/sudoers.lecture\"\n";
     }
 
+    swap_file::files { 'default':
+        ensure   => present,
+    }
+
     # nginx and vhosts
     class {'nginx': }
-    create_resources('awesome::vhost', hiera_hash('awesome::vhosts', {}))
-    # class { 'letsencrypt': }
+
+    # certificates
+    class { 'letsencrypt': }
 
     # php related
     class {'::php::fpm::daemon': }
@@ -55,5 +61,23 @@ class awesome (
     Package['opendkim'] ->
     opendkim::domain { 'awesomeretro.org':
         private_key_content => hiera('dkim::private_key'),
+    }
+
+    # phpmyadmin
+    File['/var/www/phpmyadmin/html/'] ->
+    class { 'phpmyadmin':
+        path    => '/var/www/phpmyadmin/html/pma',
+        user    => 'www-data',
+        servers => [
+            {
+                desc => 'local',
+                host => '127.0.0.1',
+            },
+        ],
+    }
+    vhosts::php{'phpmyadmin':
+        server_name    => 'phpmyadmin.awesomnia.awesomeretro.org',
+        location_allow => $pma_allow,
+        location_deny  => ['all'],
     }
 }

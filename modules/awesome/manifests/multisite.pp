@@ -7,14 +7,14 @@ class awesome::multisite (
 ){
     $webroot = '/var/www/multisite/html/'
 
-    ensure_packages(['php5-mysql'])
+    ensure_packages(['php5-mysql', 'php5-curl', 'php5-gd', 'php5-mcrypt', 'php5-xcache'])
 
     # create wordpress DB
     mysql::db { $db:
         user     => $db_user,
         password => $db_password,
         host     => 'localhost',
-        grant    => ['SELECT', 'UPDATE'],
+        grant    => ['SELECT', 'UPDATE', 'INSERT', 'DELETE'],
         sql      => $db_backup,
     }
 
@@ -35,40 +35,16 @@ class awesome::multisite (
             match => "define\\('DB_PASSWORD',";
     }
 
-
-    file {$webroot:
-        ensure => directory,
-        owner  => www-data,
-        group  => www-data,
-    } ->
-    nginx::resource::vhost { 'multisite':
-        server_name => ['_'],
-        www_root    => $webroot,
-        index_files => ['index.php'],
-        try_files   => ["\$uri", "\$uri/", 'index.php'],
-    } ->
-
-    nginx::resource::upstream { 'multisite':
-      members => [
-        'unix:/var/run/php5-fpm-multisite.sock',
-      ],
-    }
-
-    nginx::resource::location { 'multisite':
-        vhost          => 'multisite',
-        www_root       => $webroot,
-        location       => '~ \.php$',
-        fastcgi_params => '/etc/nginx/fastcgi_params',
-        fastcgi        => 'multisite',
-        try_files      => ['$uri', '$uri/', '/index.php?$args'],
-    }
-
     Package['nginx'] ->
     php::fpm::conf { 'multisite':
-      listen       => '/var/run/php5-fpm-multisite.sock',
-      user         => 'www-data',
-      listen_owner => 'www-data',
-      listen_group => 'www-data',
+        listen               => '/var/run/php5-fpm-multisite.sock',
+        user                 => 'www-data',
+        listen_owner         => 'www-data',
+        listen_group         => 'www-data',
+        pm_max_children      => 3,
+        pm_start_servers     => 2,
+        pm_min_spare_servers => 1,
+        pm_max_spare_servers => 3,
     }
 
     file_line {
@@ -77,4 +53,18 @@ class awesome::multisite (
             line => "define('DOMAIN_CURRENT_SITE', '${multisite_host}');",
             match => "define\\('DOMAIN_CURRENT_SITE',";
     }
+
+    nginx::resource::upstream { 'multisite':
+        members => [
+            'unix:/var/run/php5-fpm-multisite.sock',
+        ],
+    }
+
+    awesome::vhosts::multisite {'awesomnia.awesomeretro.org':
+        webroot        => $webroot,
+        server_name    => '_',
+        listen_options => 'default_server',
+    }
+
+    create_resources(vhosts::multisite, hiera_hash('vhosts::multisite'), {})
 }
