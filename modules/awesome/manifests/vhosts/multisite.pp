@@ -44,13 +44,29 @@ define awesome::vhosts::multisite (
     }
 
     nginx::resource::location { $name:
-        vhost          => $name,
-        ssl            => true,
-        www_root       => $multisite_webroot,
-        location       => '~ \.php$',
-        fastcgi_params => '/etc/nginx/fastcgi_params',
-        fastcgi        => 'multisite',
-        try_files      => ['$uri', '$uri/', '/index.php?$args'],
+        vhost               => $name,
+        ssl                 => true,
+        www_root            => $multisite_webroot,
+        location            => '~ \.php$',
+        fastcgi_params      => '/etc/nginx/fastcgi_params',
+        fastcgi             => 'multisite',
+        try_files           => ['$uri', '$uri/', '/index.php?$args'],
+        location_cfg_append => {
+            'fastcgi_cache'        => 'd3',
+            'fastcgi_cache_valid'  => '200 5m',
+            'fastcgi_cache_bypass' =>"\$cookie_nocache \$wordpress_nocache \$arg_nocache",
+        },
+        raw_append          => "if (\$http_cookie ~* \"wordpress_logged_in_\"){ set \$wordpress_nocache 1; }",
+    }
+
+    nginx::resource::location { "static_${name}":
+        vhost               => $name,
+        ssl                 => true,
+        www_root            => $multisite_webroot,
+        location            => '~* \.(js|css|png|jpg|jpeg|gif|ico).*$',
+        location_cfg_append => {
+            'expires' => '1w',
+        },
     }
 
     # configure letsencrypt

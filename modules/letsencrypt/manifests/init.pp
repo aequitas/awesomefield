@@ -21,6 +21,11 @@ class letsencrypt(
             source => 'puppet:///modules/letsencrypt/letsencrypt.sh',
             mode   => '0755';
 
+        "${config_root}/renew.sh":
+            ensure => present,
+            source => 'puppet:///modules/letsencrypt/renew.sh',
+            mode   => '0755';
+
         "${config_root}/config.sh":
             ensure  => present,
             content => template('letsencrypt/config.sh.erb');
@@ -49,7 +54,7 @@ class letsencrypt(
     } ~> Class['renew']
 
     cron { 'letsencrypt-renew':
-        command => "${config_root}/letsencrypt.sh -c",
+        command => "${config_root}/renew.sh >/dev/null",
         special => weekly,
     }
 

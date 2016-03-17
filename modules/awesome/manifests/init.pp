@@ -39,6 +39,9 @@ class awesome (
     }
 
     # nginx and vhosts
+    file { '/var/www/cache':
+        ensure => directory,
+    } ->
     class {'nginx': }
 
     # certificates
