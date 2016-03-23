@@ -19,6 +19,8 @@ postfix::server::relayhost: mail.it-rex.nl
 
 # configure mailman mailing lists
 
+mailman::params::default_url_pattern: "https://%s/mailman/"
+
 mailman::enable_service: true
 mailman::site_pw: geheim
 mailman::mta: Postfix
