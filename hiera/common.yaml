@@ -7,7 +7,7 @@ classes:
 
 
 # letsencrypt
-letsencrypt::email: awesome@ijohan.nl
+letsencrypt::email: bofh@awesomeretro.org
 
 # webserver config
 nginx::config::fastcgi_cache_path: /var/www/cache

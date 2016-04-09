@@ -31,7 +31,7 @@ mailman::apache::mailman_cgi_dir: /usr/lib/cgi-bin/mailman/
 mailman::apache::mailman_icons_dir: /usr/share/images/mailman/
 mailman::apache::port: 8081
 
-awesome::maillist::admin: awesomeretro@ijohan.nl
+awesome::maillist::admin: listmanager@awesomeretro.org
 awesome::maillist::password: geheim
 
 maillists:

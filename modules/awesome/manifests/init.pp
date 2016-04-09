@@ -28,7 +28,7 @@ class awesome (
     # let sudoers know not to change anything outside of puppet
     file {
         '/etc/sudoers.lecture':
-              content => "THIS HOST IS MANAGED BY PUPPET. PLEASE ONLY MAKE PERMANENT CHANGES\nTHROUGH PUPPET AND DO NOT EXPECT MANUAL CHANGES TO BE MAINTAINED.\n\n";
+              content => "THIS HOST IS MANAGED BY PUPPET. Please only make permanent changes\nthrough puppet and do not expect manual changes to be maintained!\nMore info: https://github.com/aequitas/awesomefield\n\n";
 
         '/etc/sudoers.d/lecture':
               content => "Defaults\tlecture=\"always\"\nDefaults\tlecture_file=\"/etc/sudoers.lecture\"\n";
