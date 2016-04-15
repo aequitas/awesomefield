@@ -18,11 +18,19 @@ nginx::config::fastcgi_cache_key: '"$scheme$request_method$host$request_uri"'
 vhosts::multisite:
   # Sites that only require wordpress do not need a vhost. So there is a lot that is not mentioned here. Hooray!
   # wordpress symlinks with additional files, number after vhost is wordpress site number
-  elgerjonker.nl: {}   #2
   awesomeretro.org: {} #11
   awesomespace.nl: {}  #14
+
   hackerhotel.nl: {} #15
   copynite.nl: {} #21
+
+  elgerjonker.nl: {}   #2
+  flippos.info: {}
+  tutb.nl: {}
+  twilight-cd.com: {}
+  spaceblogs.org: {}
+  illegaleshow.nl: {}
+  retrobros.nl: {}
 
   # Sites that have just files, and no symlinks to wordpress.
   # None here...
