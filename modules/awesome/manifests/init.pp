@@ -8,7 +8,7 @@ class awesome (
 
     # some utility packages
     package { ['sl', 'atop', 'htop']:
-    ensure => latest,
+      ensure => latest,
     }
 
     # enable ntp
