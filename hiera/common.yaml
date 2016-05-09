@@ -77,3 +77,12 @@ firewall:
 ssh::storeconfigs_enabled: false
 ssh::server_options:
   PasswordAuthentication: 'no'
+
+# php configuration (functional)
+php::ini::max_input_vars: 4000 #for mega menus, like twilight
+
+# php configuration (security)
+php::ini::expose_php: Off
+php::ini::display_errors: Off
+php::ini::allow_url_fopen: Off
+php::ini::allow_url_include: Off
