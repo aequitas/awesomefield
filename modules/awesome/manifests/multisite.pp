@@ -5,6 +5,8 @@ class awesome::multisite (
     $db_backup='/var/backups/multisite.sql',
     $multisite_host='awesomnia.awesomeretro.org',
     $multisite_subdomains=[],
+    $php_value={},
+    $php_flag={},
 ){
     $webroot = '/var/www/multisite/html/'
 
@@ -46,6 +48,8 @@ class awesome::multisite (
         pm_start_servers     => 2,
         pm_min_spare_servers => 1,
         pm_max_spare_servers => 3,
+        php_value            => $php_value,
+        php_flag             => $php_flag,
     }
 
     file_line {
