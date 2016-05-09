@@ -40,6 +40,27 @@ awesome::pma_allow:
   - "82.161.93.152/32"
   - "62.131.237.165/32"
 
+awesome::multisite::multisite_subdomains:
+  - retrobros
+  - illegaleshow
+  - spaceblogs
+  - tutb
+  - twilightcd
+  - awesomeretrobeta
+  - retrospots
+  - flippo
+  - hackerbar
+  - greenpoint
+  - braunmtveurocharts
+  - davilexgames
+  - arcadium
+  - tlssldashboard
+  - os9gaming
+  - hdmi
+  - retrocommunity
+  - beneluxsg
+  - dutchgameshistory
+
 # basic firewall config
 
 firewall:

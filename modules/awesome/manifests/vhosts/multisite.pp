@@ -4,14 +4,15 @@ define awesome::vhosts::multisite (
     $server_name=$name,
     $listen_options=undef,
     $rewrite_to_https=true,
+    $subdomains=[],
 ){
     if $server_name == '_' {
         $le_server_name = $name
-        $le_subdomains = []
+        $le_subdomains = $subdomains 
         $server_names = [$name]
     } else {
         $le_server_name = $server_name
-        $le_subdomains = ["www.${server_name}"]
+        $le_subdomains = concat(['www'], $subdomains)
         $server_names = [$server_name, "www.${server_name}"]
     }
 

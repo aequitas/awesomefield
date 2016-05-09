@@ -4,6 +4,7 @@ class awesome::multisite (
     $db_password=undef,
     $db_backup='/var/backups/multisite.sql',
     $multisite_host='awesomnia.awesomeretro.org',
+    $multisite_subdomains=[],
 ){
     $webroot = '/var/www/multisite/html/'
 
@@ -64,6 +65,7 @@ class awesome::multisite (
         webroot        => $webroot,
         server_name    => '_',
         listen_options => 'default_server',
+        subdomains     => $multisite_subdomains,
     }
 
     create_resources(vhosts::multisite, hiera_hash('vhosts::multisite'), {})
