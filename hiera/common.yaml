@@ -32,6 +32,8 @@ vhosts::multisite:
   illegaleshow.nl: {}
   retrobros.nl: {}
 
+  beneluxsg.org: {}
+
   # Sites that have just files, and no symlinks to wordpress.
   # None here...
 
