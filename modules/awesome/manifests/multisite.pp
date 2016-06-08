@@ -2,6 +2,9 @@ class awesome::multisite (
     $db='multisite',
     $db_user='multisite',
     $db_password=undef,
+    $db_backup_user='backup',
+    $db_backup_password=undef,
+    $db_backup_dir='/var/backups/mysql/',
     $db_backup='/var/backups/multisite.sql',
     $multisite_host='awesomnia.awesomeretro.org',
     $multisite_subdomains=[],
@@ -19,6 +22,12 @@ class awesome::multisite (
         host     => 'localhost',
         grant    => ['SELECT', 'UPDATE', 'INSERT', 'DELETE'],
         sql      => $db_backup,
+    }
+
+    class { 'mysql::server::backup':
+        backupuser     => $db_backup_user,
+        backuppassword => $db_backup_password,
+        backupdir      => $db_backup_dir,
     }
 
     # set WP config for DB settings
