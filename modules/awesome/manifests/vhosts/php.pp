@@ -27,6 +27,15 @@ define awesome::vhosts::php(
         pm_min_spare_servers => 1,
         pm_max_spare_servers => 3,
     }
+    logrotate::rule { "php-fpm-${name}-errors":
+        path         => "/var/log/php-fpm/${name}-error.log",
+        rotate       => 7,
+        rotate_every => 'day',
+        compress     => true,
+        su           => true,
+        su_owner     => 'www-data',
+        su_group     => 'www-data',
+    }
 
     file {
         "/var/www/${name}/":

@@ -60,6 +60,15 @@ class awesome::multisite (
         php_value            => $php_value,
         php_flag             => $php_flag,
     }
+    logrotate::rule { 'php-fpm-multisite-errors':
+        path         => '/var/log/php-fpm/multisite-error.log',
+        rotate       => 7,
+        rotate_every => 'day',
+        compress     => true,
+        su           => true,
+        su_owner     => 'www-data',
+        su_group     => 'www-data',
+    }
 
     file_line {
         'DOMAIN_CURRENT_SITE':
