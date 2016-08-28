@@ -20,7 +20,7 @@ class awesome::multisite (
         user     => $db_user,
         password => $db_password,
         host     => 'localhost',
-        grant    => ['SELECT', 'UPDATE', 'INSERT', 'DELETE'],
+        grant    => ['SELECT', 'UPDATE', 'INSERT', 'DELETE', 'CREATE', 'ALTER'],
         sql      => $db_backup,
     }
 
