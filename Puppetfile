@@ -7,7 +7,7 @@ mod 'puppetlabs-apache'
 mod 'puppetlabs-stdlib'
 mod 'thias-postfix'
 mod 'nwaller-mailman', :git => 'git://github.com/aequitas/puppet-mailman.git', :ref => '89e1a951131d18e7a6b2763f59412a57891e0338'
-mod 'jfryman-nginx', '0.3.0'
+mod 'puppet-nginx'
 mod 'puppetlabs-firewall'
 mod 'rjpearce-opendkim', :git => 'git@github.com:rjpearce/puppet-opendkim.git'
 
