@@ -8,12 +8,17 @@ define awesome::vhosts::multisite (
 ){
     if $server_name == '_' {
         $le_server_name = $name
-        $le_subdomains = $subdomains 
+        $le_subdomains = $subdomains
         $server_names = [$name]
     } else {
         $le_server_name = $server_name
         $le_subdomains = concat(['www'], $subdomains)
-        $server_names = [$server_name, "www.${server_name}"]
+        $server_names = concat([
+            $server_name,
+            "www.${server_name}"
+          ],
+          suffix($subdomains, ".${name}")
+        )
     }
 
     $certfile = "${::letsencrypt::cert_root}/${le_server_name}/fullchain.pem"
