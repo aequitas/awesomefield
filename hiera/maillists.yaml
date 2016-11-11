@@ -56,9 +56,6 @@ maillists:
   community:
     mailserver: awesomeretro.org
   members:
-    present: false
-    mailserver: awesomespace.nl
-  subscribers:
     mailserver: awesomespace.nl
   announce:
     mailserver: awesomespace.nl
