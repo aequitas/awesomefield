@@ -84,10 +84,11 @@ class awesome::multisite (
     }
 
     awesome::vhosts::multisite {'awesomnia.awesomeretro.org':
-        webroot        => $webroot,
-        server_name    => '_',
-        listen_options => 'default_server',
-        subdomains     => $multisite_subdomains,
+        webroot             => $webroot,
+        server_name         => '_',
+        listen_options      => 'default_server',
+        ipv6_listen_options => 'default_server',
+        subdomains          => $multisite_subdomains,
     }
 
     create_resources(vhosts::multisite, hiera_hash('vhosts::multisite'), {})

@@ -29,12 +29,7 @@ vhosts::multisite:
   tutb.nl: {}
   twilight-cd.com: {}
   spaceblogs.org: {}
-  illegaleshow.nl: {}
   retrobros.nl: {}
-
-  beneluxsg.org:
-    subdomains:
-      - events
 
   # Sites that have just files, and no symlinks to wordpress.
   # None here...
@@ -96,6 +91,39 @@ firewall:
     action: accept
   999 drop the rest:
     action: drop
+  # ipv6
+  100 v6 allow related, established:
+    proto: all
+    state:
+      - RELATED
+      - ESTABLISHED
+    action: accept
+    provider: ip6tables
+  100 v6 allow icmp:
+    proto: ipv6-icmp
+    action: accept
+    provider: ip6tables
+  100 v6 allow local:
+    proto: all
+    iniface: lo
+    action: accept
+    provider: ip6tables
+  200 v6 allow ssh:
+    dport: ssh
+    action: accept
+    provider: ip6tables
+  300 v6 allow http traffic in:
+    dport: http
+    action: accept
+    provider: ip6tables
+  300 v6 allow https traffic in:
+    dport: https
+    action: accept
+    provider: ip6tables
+  999 v6 drop the rest:
+    proto: all
+    action: drop
+    provider: ip6tables
 
 # ssh server configuration
 # https://forge.puppetlabs.com/saz/ssh#hiera-example

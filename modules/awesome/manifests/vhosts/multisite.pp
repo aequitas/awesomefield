@@ -2,8 +2,9 @@ define awesome::vhosts::multisite (
     $domain=$name,
     $webroot="/var/www/${name}/html/",
     $server_name=$name,
-    $listen_options=undef,
-    $rewrite_to_https=true,
+    $listen_options='',
+    $ipv6_listen_options='',
+    $rewrite_to_https=false,
     $subdomains=[],
 ){
     if $server_name == '_' {
@@ -38,15 +39,17 @@ define awesome::vhosts::multisite (
             group  => www-data;
     } ->
     nginx::resource::vhost { $name:
-        server_name      => $server_names,
-        www_root         => $multisite_webroot,
-        index_files      => ['index.php'],
-        try_files        => ["\$uri", "\$uri/", '/index.php?$args'],
-        listen_options   => $listen_options,
-        ssl              => true,
-        ssl_key          => $keyfile,
-        ssl_cert         => $certfile,
-        rewrite_to_https => $rewrite_to_https,
+        server_name         => $server_names,
+        www_root            => $multisite_webroot,
+        index_files         => ['index.php'],
+        try_files           => ["\$uri", "\$uri/", '/index.php?$args'],
+        listen_options      => $listen_options,
+        ipv6_listen_options => $ipv6_listen_options,
+        ipv6_enable         => true,
+        ssl                 => true,
+        ssl_key             => $keyfile,
+        ssl_cert            => $certfile,
+        rewrite_to_https    => $rewrite_to_https,
     }
 
     nginx::resource::location { $name:
