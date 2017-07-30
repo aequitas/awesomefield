@@ -1,5 +1,9 @@
 # settings for live site
 ---
+
+classes:
+  - network
+
 mailman::site_pw: ENC[PKCS7,MIIBqQYJKoZIhvcNAQcDoIIBmjCCAZYCAQAxggEhMIIBHQIBADAFMAACAQEwDQYJKoZIhvcNAQEBBQAEggEAOp0NN2gBeWWDSBUaboNq6F0l+ERlNrutIbF370YZt5p4KlO0QRv9BcESEjX6b3DjlcCkKOFsZxhUOQaCMYxxR8a3X1IVDvjFeLIsBAi+M0iuJCrwiE2nDpR3gI6JdO6DVCpMVONi8Ich6BHdeEBm5SoDxr8Ve43EvwuaY8I4nTCM2ferknxDjMJ5ct/b23uNk6IbDawM8HkJjBYqhX3wNsvKLQtmZ1lbRfN83ow6a77R7REdxIT4prkNLrwBCAsgP8KmtbOA3nejhp2DkBhjoXAQApPNarNf/WtG5JC4ti8/O8eikwGJl/aUWmtiqHscxrZruAb182rp44/29pJtLDBsBgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBCBWJqtSUTi33yx9TZaiG8bgEAWI/4Zyq8LNYUrkDNpHE3470pWp4ux6hshUj1BjUQyXbAmDtcfY/IqS5M29yk2cgSQjm+88C+/+F1rjPQqZqjs]
 
 awesome::maillist::password: ENC[PKCS7,MIIBqQYJKoZIhvcNAQcDoIIBmjCCAZYCAQAxggEhMIIBHQIBADAFMAACAQEwDQYJKoZIhvcNAQEBBQAEggEAOp0NN2gBeWWDSBUaboNq6F0l+ERlNrutIbF370YZt5p4KlO0QRv9BcESEjX6b3DjlcCkKOFsZxhUOQaCMYxxR8a3X1IVDvjFeLIsBAi+M0iuJCrwiE2nDpR3gI6JdO6DVCpMVONi8Ich6BHdeEBm5SoDxr8Ve43EvwuaY8I4nTCM2ferknxDjMJ5ct/b23uNk6IbDawM8HkJjBYqhX3wNsvKLQtmZ1lbRfN83ow6a77R7REdxIT4prkNLrwBCAsgP8KmtbOA3nejhp2DkBhjoXAQApPNarNf/WtG5JC4ti8/O8eikwGJl/aUWmtiqHscxrZruAb182rp44/29pJtLDBsBgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBCBWJqtSUTi33yx9TZaiG8bgEAWI/4Zyq8LNYUrkDNpHE3470pWp4ux6hshUj1BjUQyXbAmDtcfY/IqS5M29yk2cgSQjm+88C+/+F1rjPQqZqjs]
@@ -36,3 +40,17 @@ dkim::public_key: |
     22n7i9tcgRwuptkIVrgJdmzqe6Hq+edGe+nhiB1ZPLk0SGqUlot3LXVMBOSo//T4
     zmbwRi/Zp9dvh2qxuwIDAQAB
     -----END PUBLIC KEY-----
+
+network::interfaces_hash:
+  eth0:
+    method: dhcp
+  lo_v6:
+    interface: lo
+    family: inet6
+    method: loopback
+  eth0_v6:
+    interface: eth0
+    family: inet6
+    address: 2a01:7c8:aab8:5d::1
+    netmask: 48
+    gateway: 2a01:7c8:aab8::1

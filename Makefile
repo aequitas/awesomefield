@@ -10,7 +10,7 @@ apply deploy: Puppetfile.lock
 	scripts/deploy.sh ${host} ${args}
 
 plan: Puppetfile.lock
-	scripts/deploy.sh ${host} --noop --test ${args}
+	scripts/deploy.sh ${host} --noop --test --verbose ${args}
 
 mrproper clean:
 	rm -rf vendor Puppetfile.lock
